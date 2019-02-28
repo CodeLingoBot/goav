@@ -18,17 +18,17 @@ type (
 	AvSampleFormat C.enum_AVSampleFormat
 )
 
-//Get the Class for Context.
+// SwrGetClass gets the Class for Context.
 func SwrGetClass() *Class {
 	return (*Class)(C.swr_get_class())
 }
 
-//Context constructor functions.Allocate Context.
+// Context constructor functions.Allocate Context.
 func SwrAlloc() *Context {
 	return (*Context)(C.swr_alloc())
 }
 
-//Configuration accessors
+// Configuration accessors
 func SwresampleVersion() uint {
 	return uint(C.swresample_version())
 }

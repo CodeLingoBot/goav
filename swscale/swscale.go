@@ -26,32 +26,32 @@ type (
 	PixelFormat C.enum_AVPixelFormat
 )
 
-//Return the LIBSWSCALE_VERSION_INT constant.
+// SwscaleVersion returns the LIBSWSCALE_VERSION_INT constant.
 func SwscaleVersion() uint {
 	return uint(C.swscale_version())
 }
 
-//Return the libswscale build-time configuration.
+// SwscaleConfiguration returns the libswscale build-time configuration.
 func SwscaleConfiguration() string {
 	return C.GoString(C.swscale_configuration())
 }
 
-//Return the libswscale license.
+// SwscaleLicense returns the libswscale license.
 func SwscaleLicense() string {
 	return C.GoString(C.swscale_license())
 }
 
-//Return a pointer to yuv<->rgb coefficients for the given colorspace suitable for sws_setColorspaceDetails().
+// SwsGetcoefficients returns a pointer to yuv<->rgb coefficients for the given colorspace suitable for sws_setColorspaceDetails().
 func SwsGetcoefficients(c int) *int {
 	return (*int)(unsafe.Pointer(C.sws_getCoefficients(C.int(c))))
 }
 
-//Return a positive value if pix_fmt is a supported input format, 0 otherwise.
+// SwsIssupportedinput returns a positive value if pix_fmt is a supported input format, 0 otherwise.
 func SwsIssupportedinput(p PixelFormat) int {
 	return int(C.sws_isSupportedInput((C.enum_AVPixelFormat)(p)))
 }
 
-//Return a positive value if pix_fmt is a supported output format, 0 otherwise.
+// SwsIssupportedoutput returns a positive value if pix_fmt is a supported output format, 0 otherwise.
 func SwsIssupportedoutput(p PixelFormat) int {
 	return int(C.sws_isSupportedOutput((C.enum_AVPixelFormat)(p)))
 }
@@ -95,17 +95,17 @@ func SwsFreefilter(f *Filter) {
 	C.sws_freeFilter((*C.struct_SwsFilter)(f))
 }
 
-//Convert an 8-bit paletted frame into a frame with a color depth of 32 bits.
+// Convert an 8-bit paletted frame into a frame with a color depth of 32 bits.
 func SwsConvertpalette8topacked32(s, d *uint8, px int, p *uint8) {
 	C.sws_convertPalette8ToPacked32((*C.uint8_t)(s), (*C.uint8_t)(d), C.int(px), (*C.uint8_t)(p))
 }
 
-//Convert an 8-bit paletted frame into a frame with a color depth of 24 bits.
+// Convert an 8-bit paletted frame into a frame with a color depth of 24 bits.
 func SwsConvertpalette8topacked24(s, d *uint8, px int, p *uint8) {
 	C.sws_convertPalette8ToPacked24((*C.uint8_t)(s), (*C.uint8_t)(d), C.int(px), (*C.uint8_t)(p))
 }
 
-//Get the Class for swsContext.
+// SwsGetClass gets the Class for swsContext.
 func SwsGetClass() *Class {
 	return (*Class)(C.sws_get_class())
 }

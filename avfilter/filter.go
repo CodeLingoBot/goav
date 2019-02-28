@@ -9,17 +9,17 @@ package avfilter
 */
 import "C"
 
-//Get a filter definition matching the given name.
+// AvfilterGetByName gets a filter definition matching the given name.
 func AvfilterGetByName(n string) *Filter {
 	return (*Filter)(C.avfilter_get_by_name(C.CString(n)))
 }
 
-//Register a filter.
+// Register a filter.
 func (f *Filter) AvfilterRegister() int {
 	return int(C.avfilter_register((*C.struct_AVFilter)(f)))
 }
 
-//Iterate over all registered filters.
+// Iterate over all registered filters.
 func (f *Filter) AvfilterNext() *Filter {
 	return (*Filter)(C.avfilter_next((*C.struct_AVFilter)(f)))
 }
